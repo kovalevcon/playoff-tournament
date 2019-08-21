@@ -30,103 +30,135 @@
         <section id="bracket">
             <div class="container">
                 <div class="split split-one">
-                    <div class="round round-one current">
+                    <div class="round round-one">
                         <div class="round-details">1/8 finals</div>
-                        <ul class="matchup" id="match-1">
-                            <li class="team team-top">Уругвай<span class="score">2</span></li>
-                            <li class="team team-bottom">Португалия<span class="score">1</span></li>
-                        </ul>
-                        <ul class="matchup" id="match-2">
-                            <li class="team team-top">Франция<span class="score">4</span></li>
-                            <li class="team team-bottom">Аргентина<span class="score">3</span></li>
-                        </ul>
-                        <ul class="matchup"  id="match-3">
-                            <li class="team team-top">Бразилия<span class="score">2</span></li>
-                            <li class="team team-bottom">Мексика<span class="score">0</span></li>
-                        </ul>
-                        <ul class="matchup" id="match-4">
-                            <li class="team team-top">Бельгия<span class="score">3</span></li>
-                            <li class="team team-bottom">Япония<span class="score">2</span></li>
-                        </ul>
+                        @foreach([1, 2, 3, 4] as $key)
+                            @if(isset($matches[$key]))
+                                <ul class="matchup current" id="match-{{ $key }}">
+                                    <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                    <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                </ul>
+                            @else
+                                <ul class="matchup" id="match-{{ $key }}">
+                                    <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                    <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                                </ul>
+                            @endif
+                        @endforeach
                     </div>
 
-                    <div class="round round-two current">
+                    <div class="round round-two">
                         <div class="round-details">1/4 finals</div>
-                        <ul class="matchup" id="match-9">
-                            <li class="team team-top">Уругвай<span class="score">0</span></li>
-                            <li class="team team-bottom">Франция<span class="score">2</span></li>
-                        </ul>
-                        <ul class="matchup" id="match-10">
-                            <li class="team team-top">Бразилия<span class="score">1</span></li>
-                            <li class="team team-bottom">Бельгия<span class="score">2</span></li>
-                        </ul>
+                        @foreach([9, 10] as $key)
+                            @if(isset($matches[$key]))
+                                <ul class="matchup current" id="match-{{ $key }}">
+                                    <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                    <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                </ul>
+                            @else
+                                <ul class="matchup" id="match-{{ $key }}">
+                                    <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                    <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                                </ul>
+                            @endif
+                        @endforeach
                     </div>
 
-                    <div class="round round-three current">
+                    <div class="round round-three">
                         <div class="round-details">1/2 finals</div>
-                        <ul class="matchup" id="match-13">
-                            <li class="team team-top">Франция<span class="score">1</span></li>
-                            <li class="team team-bottom">Бельгия<span class="score">0</span></li>
-                        </ul>
+                        @if(isset($matches[13]))
+                            <ul class="matchup current" id="match-13">
+                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                            </ul>
+                        @else
+                            <ul class="matchup" id="match-13">
+                                <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
 
                 <div class="champion">
-                    <div class="final current">
+                    <div class="final">
                         <i class="fa fa-trophy"></i>
                         <div class="round-details">Final</div>
-                        <ul class="matchup" id="match-16">
-                            <li class="team team-top">Франция<span class="score">2</span></li>
-                            <li class="team team-bottom">Хорватия<span class="score">1</span></li>
-                        </ul>
+                        @if(isset($matches[16]))
+                            <ul class="matchup current" id="match-16">
+                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                            </ul>
+                        @else
+                            <ul class="matchup" id="match-16">
+                                <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                            </ul>
+                        @endif
 
                         <div class="round-details">3rd place</div>
-                        <ul class="matchup" id="match-15">
-                            <li class="team team-top">Бельгия<span class="score">2</span></li>
-                            <li class="team team-bottom">Англия<span class="score">1</span></li>
-                        </ul>
+                        @if(isset($matches[15]))
+                            <ul class="matchup current" id="match-15">
+                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                            </ul>
+                        @else
+                            <ul class="matchup" id="match-15">
+                                <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
 
                 <div class="split split-two">
-                    <div class="round round-three current">
+                    <div class="round round-three">
                         <div class="round-details">1/2 finals</div>
-                        <ul class="matchup" id="match-14">
-                            <li class="team team-top">Хорватия<span class="score">2</span></li>
-                            <li class="team team-bottom">Англия<span class="score">1</span></li>
-                        </ul>
+                        @if(isset($matches[14]))
+                            <ul class="matchup current" id="match-14">
+                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                            </ul>
+                        @else
+                            <ul class="matchup" id="match-14">
+                                <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                            </ul>
+                        @endif
                     </div>
 
-                    <div class="round round-two current">
+                    <div class="round round-two">
                         <div class="round-details">1/4 finals</div>
-                        <ul class="matchup" id="match-13">
-                            <li class="team team-top">Россия<span class="score">2</span></li>
-                            <li class="team team-bottom">Хорватия<span class="score">2</span></li>
-                        </ul>
-                        <ul class="matchup">
-                            <li class="team team-top">Швеция<span class="score">0</span></li>
-                            <li class="team team-bottom">Англия<span class="score">2</span></li>
-                        </ul>
+                        @foreach([11, 12] as $key)
+                            @if(isset($matches[$key]))
+                                <ul class="matchup current" id="match-{{ $key }}">
+                                    <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                    <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                </ul>
+                            @else
+                                <ul class="matchup" id="match-{{ $key }}">
+                                    <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                    <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                                </ul>
+                            @endif
+                        @endforeach
                     </div>
 
-                    <div class="round round-one current">
+                    <div class="round round-one">
                         <div class="round-details">1/8 finals</div>
-                        <ul class="matchup">
-                            <li class="team team-top">Испания<span class="score">1</span></li>
-                            <li class="team team-bottom">Россия<span class="score">1</span></li>
-                        </ul>
-                        <ul class="matchup">
-                            <li class="team team-top">Хорватия<span class="score">1</span></li>
-                            <li class="team team-bottom">Дания<span class="score">1</span></li>
-                        </ul>
-                        <ul class="matchup">
-                            <li class="team team-top">Швеция<span class="score">1</span></li>
-                            <li class="team team-bottom">Швейцария<span class="score">0</span></li>
-                        </ul>
-                        <ul class="matchup">
-                            <li class="team team-top">Колумбия<span class="score">1</span></li>
-                            <li class="team team-bottom">Англия<span class="score">1</span></li>
-                        </ul>
+                        @foreach([5, 6, 7, 8] as $key)
+                            @if(isset($matches[$key]))
+                                <ul class="matchup current" id="match-{{ $key }}">
+                                    <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
+                                    <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                </ul>
+                            @else
+                                <ul class="matchup" id="match-{{ $key }}">
+                                    <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+                                    <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+                                </ul>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
