@@ -27,8 +27,9 @@ class TeamController extends AdminController
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
+        /** @var Grid $grid */
         $grid = new Grid(new Team);
 
         $grid->column('id', __('Id'));
@@ -36,17 +37,22 @@ class TeamController extends AdminController
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
+        $grid->filter(function ($filter) {
+            $filter->like('country', 'County');
+        });
+
         return $grid;
     }
 
     /**
      * Make a show builder.
      *
-     * @param mixed $id
+     * @param int $id
      * @return Show
      */
-    protected function detail($id)
+    protected function detail(int $id): Show
     {
+        /** @var Show $show */
         $show = new Show(Team::findOrFail($id));
 
         $show->field('id', __('Id'));
@@ -62,11 +68,12 @@ class TeamController extends AdminController
      *
      * @return Form
      */
-    protected function form()
+    protected function form(): Form
     {
+        /** @var Form $form */
         $form = new Form(new Team);
 
-        $form->text('country', __('Country'));
+        $form->text('country', __('Country'))->rules(Team::getRule('country'));
 
         return $form;
     }

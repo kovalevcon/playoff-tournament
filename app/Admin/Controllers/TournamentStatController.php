@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Admin\Controllers;
 
 use App\Entities\TournamentStat;
@@ -8,6 +8,11 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
+/**
+ * Class TournamentStatController
+ *
+ * @package App\Admin\Controllers
+ */
 class TournamentStatController extends AdminController
 {
     /**
@@ -22,13 +27,20 @@ class TournamentStatController extends AdminController
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
+        /** @var Grid $grid */
         $grid = new Grid(new TournamentStat);
 
         $grid->column('id', __('Id'));
-        $grid->column('tournament_id', __('Tournament id'));
-        $grid->column('team_id', __('Team id'));
+        $grid->column('tournament_id', __('Tournament id'))->display(function () {
+            return '<a href="' . route('tournaments.show', ['tournament' => $this->tournament_id]) .
+                "\" target=\"_blank\">{$this->tournament->name}</a>";
+        });
+        $grid->column('team_id', __('Team id'))->display(function () {
+            return '<a href="' . route('teams.show', ['match' => $this->team_id]) .
+                "\" target=\"_blank\">{$this->team->country}</a>";
+        });
         $grid->column('count_matches', __('Count matches'));
         $grid->column('place_in_tournament', __('Place in tournament'));
         $grid->column('count_score', __('Count score'));
@@ -37,11 +49,18 @@ class TournamentStatController extends AdminController
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
-        $grid->actions(function ($actions) {
-            $actions->disableDelete();
-            $actions->disableEdit();
-            $actions->disableView();
+        $grid->filter(function ($filter) {
+            $filter->like('tournament_id', 'Tournament id');
+            $filter->like('team_id', 'Team_id');
+            $filter->like('count_matches', 'Count matches');
+            $filter->like('place_in_tournament', 'Place in tournament');
+            $filter->like('count_score', 'Count score');
+            $filter->like('average_score', 'Average score');
+            $filter->like('high_score', 'High score');
         });
+
+        $grid->disableCreateButton();
+        $grid->disableActions();
 
         return $grid;
     }
@@ -49,11 +68,12 @@ class TournamentStatController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed $id
+     * @param int $id
      * @return Show
      */
-    protected function detail($id)
+    protected function detail(int $id): Show
     {
+        /** @var Show $show */
         $show = new Show(TournamentStat::findOrFail($id));
 
         $show->field('id', __('Id'));
@@ -75,8 +95,9 @@ class TournamentStatController extends AdminController
      *
      * @return Form
      */
-    protected function form()
+    protected function form(): Form
     {
+        /** @var Form $form */
         $form = new Form(new TournamentStat);
 
         $form->number('tournament_id', __('Tournament id'));

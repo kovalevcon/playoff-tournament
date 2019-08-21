@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Match extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, RulesHelper;
 
     /**
      * The attributes that are mass assignable.
@@ -64,10 +64,10 @@ class Match extends Model
     public function rules(): array
     {
         return [
-            'top_team_id'       => 'required|number',
-            'bottom_team_id'    => 'required|number',
-            'top_team_score'    => 'number',
-            'bottom_team_score' => 'number',
+            'top_team_id'       => 'required|numeric|different:bottom_team_id',
+            'bottom_team_id'    => 'required|numeric|different:top_team_id',
+            'top_team_score'    => 'required|numeric',
+            'bottom_team_score' => 'required|numeric',
         ];
     }
 
@@ -109,5 +109,44 @@ class Match extends Model
     public function losingTeam(): BelongsTo
     {
         return $this->top_team_score < $this->bottom_team_score ? $this->topTeam() : $this->bottomTeam();
+    }
+
+    /**
+     * Get label of match
+     *
+     * @return string
+     */
+    public function label(): string
+    {
+        return "`{$this->topTeam->country}` vs `{$this->bottomTeam->country}`";
+    }
+
+    /**
+     * Get label of match with scores
+     *
+     * @return string
+     */
+    public function labelWithScore(): string
+    {
+        return "`{$this->topTeam->country}` vs `{$this->bottomTeam->country}`" .
+            " ({$this->top_team_score}:{$this->bottom_team_score})";
+    }
+
+    /**
+     * Get data for form select
+     *
+     * @return array
+     */
+    public static function dataForSelect(): array
+    {
+        $result = [];
+        /** @var \Illuminate\Support\Collection $matches */
+        $matches = Match::where('id', '!=', 0)->with(['topTeam', 'bottomTeam'])->get();
+        foreach ($matches as $match) {
+            /** @var \App\Entities\Match $match */
+            $result[$match->id] = $match->labelWithScore();
+        }
+
+        return $result;
     }
 }

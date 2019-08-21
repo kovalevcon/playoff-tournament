@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 
@@ -21,10 +22,12 @@ use Illuminate\Support\Collection;
  * @property \Carbon\Carbon|string $created_at
  * @property \Carbon\Carbon|string $updated_at
  * @property \Carbon\Carbon|string $deleted_at
+ * @property \App\Entities\Tournament|null $tournament
+ * @property \App\Entities\Team|null $team
  */
 class TournamentStat extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, RulesHelper;
 
     /** @var array $placeInTournament */
     public static $placeInTournament = [
@@ -139,6 +142,26 @@ class TournamentStat extends Model
             'average_score'         => 'numeric',
             'high_score'            => 'numeric',
         ];
+    }
+
+    /**
+     * Get tournament model by tournament_id
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tournament(): BelongsTo
+    {
+        return $this->belongsTo(Tournament::class, 'tournament_id', 'id');
+    }
+
+    /**
+     * Get team model by tournament_id
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class, 'team_id', 'id');
     }
 
     /**

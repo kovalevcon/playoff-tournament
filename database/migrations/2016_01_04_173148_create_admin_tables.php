@@ -12,7 +12,7 @@ class CreateAdminTables extends Migration
     /**
      * {@inheritdoc}
      */
-    public function getConnection(): void
+    public function getConnection()
     {
         return config('admin.database.connection') ?: config('database.default');
     }

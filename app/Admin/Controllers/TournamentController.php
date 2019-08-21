@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Admin\Controllers;
 
 use App\Entities\Tournament;
@@ -8,6 +8,11 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
+/**
+ * Class TournamentController
+ *
+ * @package App\Admin\Controllers
+ */
 class TournamentController extends AdminController
 {
     /**
@@ -15,15 +20,16 @@ class TournamentController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Entities\Tournament';
+    protected $title = 'Tournaments';
 
     /**
      * Make a grid builder.
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
+        /** @var Grid $grid */
         $grid = new Grid(new Tournament);
 
         $grid->column('id', __('Id'));
@@ -31,17 +37,22 @@ class TournamentController extends AdminController
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
+        $grid->filter(function ($filter) {
+            $filter->like('name', 'Name');
+        });
+
         return $grid;
     }
 
     /**
      * Make a show builder.
      *
-     * @param mixed $id
+     * @param int $id
      * @return Show
      */
-    protected function detail($id)
+    protected function detail(int $id): Show
     {
+        /** @var Show $show */
         $show = new Show(Tournament::findOrFail($id));
 
         $show->field('id', __('Id'));
@@ -57,11 +68,12 @@ class TournamentController extends AdminController
      *
      * @return Form
      */
-    protected function form()
+    protected function form(): Form
     {
+        /** @var Form $form */
         $form = new Form(new Tournament);
 
-        $form->text('name', __('Name'));
+        $form->text('name', __('Name'))->rules(Tournament::getRule('name'));
 
         return $form;
     }

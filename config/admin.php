@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Playoff Tournament admin',
+    'name' => 'Tournament admin',
 
     /*
     |--------------------------------------------------------------------------

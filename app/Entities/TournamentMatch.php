@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class TournamentMatch extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, RulesHelper;
 
     const
         ONE_EIGHTH_STAGE    = '1/8',
@@ -66,15 +66,18 @@ class TournamentMatch extends Model
         'deleted_at',
     ];
 
+    /**
+     * @inheritDoc
+     */
     protected static function boot()
     {
         parent::boot();
 
-        self::created(function($model) {
+        self::created(function ($model) {
             TournamentStat::updateTournamentStat($model);
         });
 
-        self::updated(function($model) {
+        self::updated(function ($model) {
             TournamentStat::updateTournamentStat($model);
         });
     }
@@ -89,8 +92,8 @@ class TournamentMatch extends Model
         return [
             'tournament_id'     => 'required|numeric',
             'match_id'          => 'required|numeric',
-            'top_match_id'      => 'required|numeric',
-            'bottom_match_id'   => 'required|numeric',
+            'top_match_id'      => 'nullable|numeric',
+            'bottom_match_id'   => 'nullable|numeric',
             'match_number'      => 'required|numeric',
             'stage'             => 'required|string',
         ];
@@ -162,5 +165,31 @@ class TournamentMatch extends Model
         }
 
         return $result;
+    }
+
+    /**
+     * Get data match number for form select
+     *
+     * @return array
+     */
+    public static function dataMatchNumberForSelect(): array
+    {
+        return array_combine(range(1, 16), range(1, 16));
+    }
+
+    /**
+     * Get data stage for form select
+     *
+     * @return array
+     */
+    public static function dataStageForSelect(): array
+    {
+        return [
+            self::ONE_EIGHTH_STAGE  => self::ONE_EIGHTH_STAGE,
+            self::ONE_FOUR_STAGE    => self::ONE_FOUR_STAGE,
+            self::ONE_TWO_STAGE     => self::ONE_TWO_STAGE,
+            self::THIRD_PLACE_STAGE => self::THIRD_PLACE_STAGE,
+            self::FINAL_STAGE       => self::FINAL_STAGE
+        ];
     }
 }

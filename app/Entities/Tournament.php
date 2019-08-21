@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Tournament extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, RulesHelper;
 
     /**
      * The attributes that are mass assignable.
