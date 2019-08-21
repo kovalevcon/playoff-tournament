@@ -66,6 +66,19 @@ class TournamentMatch extends Model
         'deleted_at',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function($model) {
+            TournamentStat::updateTournamentStat($model);
+        });
+
+        self::updated(function($model) {
+            TournamentStat::updateTournamentStat($model);
+        });
+    }
+
     /**
      * Get rules for model attributes
      *

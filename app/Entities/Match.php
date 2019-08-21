@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Entities\Team|null $topTeam
  * @property \App\Entities\Team|null $bottomTeam
  * @property \App\Entities\Team|null $winnerTeam
+ * @property \App\Entities\Team|null $losingTeam
  */
 class Match extends Model
 {
@@ -98,5 +99,15 @@ class Match extends Model
     public function winnerTeam(): BelongsTo
     {
         return $this->top_team_score > $this->bottom_team_score ? $this->topTeam() : $this->bottomTeam();
+    }
+
+    /**
+     * Get losing team model by low score
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function losingTeam(): BelongsTo
+    {
+        return $this->top_team_score < $this->bottom_team_score ? $this->topTeam() : $this->bottomTeam();
     }
 }

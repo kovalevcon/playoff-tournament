@@ -16,6 +16,7 @@ class IndexController extends Controller
     /**
      * Render main page with tournament grid
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request): View
