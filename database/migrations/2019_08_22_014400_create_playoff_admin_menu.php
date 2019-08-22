@@ -1,11 +1,12 @@
 <?php
-
+declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 /**
- * Class CreateAdminMenu
+ * Class CreatePlayoffAdminMenu
  */
-class CreateAdminMenu extends Migration
+class CreatePlayoffAdminMenu extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +15,10 @@ class CreateAdminMenu extends Migration
      */
     public function up(): void
     {
-        \Illuminate\Support\Facades\DB::table('admin_menu')->delete(1);
+        DB::table('admin_menu')->delete(1);
 
         /** @var int $rootId */
-        $rootId = \Illuminate\Support\Facades\DB::table('admin_menu')->insertGetId(
+        $rootId = DB::table('admin_menu')->insertGetId(
             [
                 'parent_id'     => 0,
                 'order'         => 1,
@@ -30,7 +31,7 @@ class CreateAdminMenu extends Migration
             ]
         );
 
-        \Illuminate\Support\Facades\DB::table('admin_menu')->insert([
+        DB::table('admin_menu')->insert([
             [
                 'parent_id'     => $rootId,
                 'order'         => 2,

@@ -20,8 +20,8 @@ class CreateTournamentMatchesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tournament_id');
             $table->unsignedBigInteger('match_id');
-            $table->unsignedBigInteger('top_match_id');
-            $table->unsignedBigInteger('bottom_match_id');
+            $table->unsignedBigInteger('top_match_id')->nullable();
+            $table->unsignedBigInteger('bottom_match_id')->nullable();
             $table->unsignedTinyInteger('match_number');
             $table->string('stage', 10);
             $table->timestamps();

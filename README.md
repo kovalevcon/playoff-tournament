@@ -19,7 +19,18 @@ The administrative section displays a report on commands with fields:
 * “best performance per match”.
 
 # Screenshots
-TODO
+
+Main page full:
+![Main page full](public/images/sreenshots/main-page-all.png)
+
+Main page tournament grid:
+![Main page full](public/images/sreenshots/main-page-tournament-grid.png)
+
+Admin panel - Tournament statistics:
+![Main page full](public/images/sreenshots/admin-panel-tournament-stats.png)
+
+Admin panel - Tournament matches:
+![Main page full](public/images/sreenshots/admin-panel-tournament-matches.png)
 
 # Install
 
@@ -33,10 +44,10 @@ TODO
     ```bash
     php artisan admin:install
     ```
-3. Execute migrations:
+3. Refresh migrations (some problem with admin_menu inserting):
 
     ```bash
-    php artisan migrate
+    php artisan migrate:refresh --path=/database/migrations/2019_08_22_014400_create_playoff_admin_menu.php
     ```
 
 4. **(Optional)** Complete seeds for example data (teams, matches, tournament, tournament matches):
@@ -44,6 +55,11 @@ TODO
     ```bash
     php artisan db:seed
     ```
+
+5. See main page on `http://localhost/`.
+
+6. See admin panel on `http://localhost/admin`.
+   Login: `admin`, Password: `admin`.
 
 Thanks `Joe Beason` for design ([link](https://codepen.io/jbeason/full/Wbaedb/)).
 
