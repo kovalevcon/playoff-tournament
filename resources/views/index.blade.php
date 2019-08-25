@@ -68,8 +68,8 @@
                         <div class="round-details">1/2 finals</div>
                         @if(isset($matches[13]))
                             <ul class="matchup current" id="match-13">
-                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
-                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[13]['top_team_name'] }}<span class="score">{{ $matches[13]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[13]['bottom_team_name'] }}<span class="score">{{ $matches[13]['bottom_team_score'] }}</span></li>
                             </ul>
                         @else
                             <ul class="matchup" id="match-13">
@@ -86,8 +86,8 @@
                         <div class="round-details">Final</div>
                         @if(isset($matches[16]))
                             <ul class="matchup current" id="match-16">
-                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
-                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[16]['top_team_name'] }}<span class="score">{{ $matches[16]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[16]['bottom_team_name'] }}<span class="score">{{ $matches[16]['bottom_team_score'] }}</span></li>
                             </ul>
                         @else
                             <ul class="matchup" id="match-16">
@@ -99,8 +99,8 @@
                         <div class="round-details">3rd place</div>
                         @if(isset($matches[15]))
                             <ul class="matchup current" id="match-15">
-                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
-                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[15]['top_team_name'] }}<span class="score">{{ $matches[15]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[15]['bottom_team_name'] }}<span class="score">{{ $matches[15]['bottom_team_score'] }}</span></li>
                             </ul>
                         @else
                             <ul class="matchup" id="match-15">
@@ -116,8 +116,8 @@
                         <div class="round-details">1/2 finals</div>
                         @if(isset($matches[14]))
                             <ul class="matchup current" id="match-14">
-                                <li class="team team-top">{{ $matches[$key]['top_team_name'] }}<span class="score">{{ $matches[$key]['top_team_score'] }}</span></li>
-                                <li class="team team-top">{{ $matches[$key]['bottom_team_name'] }}<span class="score">{{ $matches[$key]['bottom_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[14]['top_team_name'] }}<span class="score">{{ $matches[14]['top_team_score'] }}</span></li>
+                                <li class="team team-top">{{ $matches[14]['bottom_team_name'] }}<span class="score">{{ $matches[14]['bottom_team_score'] }}</span></li>
                             </ul>
                         @else
                             <ul class="matchup" id="match-14">
