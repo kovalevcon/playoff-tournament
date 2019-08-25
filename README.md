@@ -34,31 +34,36 @@ Admin panel - Tournament matches:
 
 # Install
 
-1. Install dependencies:
+1. Copy and edit env file:
+    ```bash
+    cp .env.example .env
+    ```
+
+2. Install dependencies:
 
     ```bash
     composer install
     ```
-2. Install admin-panel:
+3. Install admin-panel:
 
     ```bash
     php artisan admin:install
     ```
-3. Refresh migrations (some problem with admin_menu inserting):
+4. Refresh migrations (some problem with admin_menu inserting):
 
     ```bash
     php artisan migrate:refresh --path=/database/migrations/2019_08_22_014400_create_playoff_admin_menu.php
     ```
 
-4. **(Optional)** Complete seeds for example data (teams, matches, tournament, tournament matches):
+5. **(Optional)** Complete seeds for example data (teams, matches, tournament, tournament matches):
 
     ```bash
     php artisan db:seed
     ```
 
-5. See main page on `http://localhost/`.
+6. See main page on `http://localhost/`.
 
-6. See admin panel on `http://localhost/admin`.
+7. See admin panel on `http://localhost/admin`.
    Login: `admin`, Password: `admin`.
 
 Thanks `Joe Beason` for design ([link](https://codepen.io/jbeason/full/Wbaedb/)).
